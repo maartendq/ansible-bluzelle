@@ -1,0 +1,19 @@
+---
+- hosts: sentries
+  become: yes
+  any_errors_fatal: true
+  tasks:
+    # Installing curl to force apt-get update
+    - name: Update repositories cache and install "curl" package
+      apt:
+        name: curl
+        update_cache: yes
+    - import_role:
+        name: ansible-role-golang
+    - import_role:
+        name: bluzelle
+    - name: Include sentry task
+      include_role:
+        name: bluzelle
+        tasks_from: sentry
+...

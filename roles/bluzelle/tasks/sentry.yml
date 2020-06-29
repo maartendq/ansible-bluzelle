@@ -1,0 +1,39 @@
+---
+- name: Set persistent peers
+  lineinfile:
+    path: /home/{{ runuser }}/.blzd/config/config.toml
+    regexp: '^persistent_peers ='
+    line: persistent_peers = "{{ sentry_persistent_peers }}"
+
+- name: Set private peers
+  lineinfile:
+    path: /home/{{ runuser }}/.blzd/config/config.toml
+    regexp: '^private_peer_ids ='
+    line: persistent_peers = "{{ sentry_private_peers }}"
+
+- name: Set pex
+  lineinfile:
+    path: /home/{{ runuser }}/.blzd/config/config.toml
+    regexp: '^pex ='
+    line: pex = true
+
+- name: Set Maximum number of inbound peers
+  lineinfile:
+    path: /home/{{ runuser }}/.blzd/config/config.toml
+    regexp: '^max_num_inbound_peers ='
+    line: max_num_inbound_peers = {{ max_num_inbound_peers }}
+
+- name: Set Maximum number of outbound peers to connect to, excluding persistent peers
+  lineinfile:
+    path: /home/{{ runuser }}/.blzd/config/config.toml
+    regexp: '^max_num_outbound_peers ='
+    line: max_num_outbound_peers = {{ max_num_outbound_peers }}
+
+- name: Make sure blzd is running
+  systemd:
+    state: started
+    daemon_reload: yes
+    enabled: yes
+    name: blzd
+  become_user: "{{ runuser }}"
+...

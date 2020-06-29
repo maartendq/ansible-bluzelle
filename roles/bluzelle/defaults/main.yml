@@ -1,0 +1,17 @@
+---
+# TODO:
+#   * move moniker_name out defaults
+#   * move validator_persistent_peers out defaults
+#   * move sentry_persistent_peers out defaults
+bluzelle_version: "testnet"
+chain_id: "bluzelle"
+moniker_name: "sentryTest"
+validator_persistent_peers: "dbc39feecf277f59b4b16ae277e8545c54ac244a@a.sentry.testnet.public.bluzelle.com:26656, f1b412c2a33bda98f42959e86602a0ca9a3ede22@b.sentry.testnet.public.bluzelle.com:26656, 87e575d7f765a965f0518fbb41d34f371afa0fda@c.sentry.testnet.public.bluzelle.com:26656, 3a36a8dbbc5ee1234945933c00aa8ad362751829@d.sentry.testnet.public.bluzelle.com:26656, 1b2639a20921407fba5367642213844ea7d8f677@e.sentry.testnet.public.bluzelle.com:26656"
+sentry_persistent_peers: "dbc39feecf277f59b4b16ae277e8545c54ac244a@a.sentry.testnet.public.bluzelle.com:26656, f1b412c2a33bda98f42959e86602a0ca9a3ede22@b.sentry.testnet.public.bluzelle.com:26656, 87e575d7f765a965f0518fbb41d34f371afa0fda@c.sentry.testnet.public.bluzelle.com:26656, 3a36a8dbbc5ee1234945933c00aa8ad362751829@d.sentry.testnet.public.bluzelle.com:26656, 1b2639a20921407fba5367642213844ea7d8f677@e.sentry.testnet.public.bluzelle.com:26656"
+sentry_private_peers: ""
+max_num_inbound_peers: 200
+max_num_outbound_peers: 100
+minimum_gas_prices: "10.0ubnt"
+runuser: "blz"
+self_delegator: "vuser"
+...

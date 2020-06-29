@@ -1,0 +1,36 @@
+---
+- name: Set persistent peers
+  lineinfile:
+    path: /home/{{ runuser }}/.blzd/config/config.toml
+    regexp: '^persistent_peers ='
+    line: persistent_peers = {{ validator_persistent_peers }}
+
+- name: Set pex
+  lineinfile:
+    path: /home/{{ runuser }}/.blzd/config/config.toml
+    regexp: '^pex ='
+    line: pex = false
+
+- name: Create keys for user
+  command: 
+    cmd: "/go/bin/blzcli keys add {{ self_delegator }}"
+  register: self_delegator_keys
+  become: yes
+  become_user: "{{ runuser }}"
+
+# - name: Get wallet word seed from result of initial transaction locally
+#   when: initresult["changed"]
+#   shell: "echo '{{initresult.stdout}}' | python -c 'import json,sys ; print json.loads(\"\".join(sys.stdin.readlines()))[\"app_message\"][\"secret\"]'"
+#   changed_when: false
+#   register: walletkey
+#   connection: local
+
+- name: Write wallet word seed to local files
+  # when: initresult["changed"]
+  copy: "content={{self_delegator_keys}} dest=keys_node.txt"
+  become: no
+  connection: local
+
+
+
+...

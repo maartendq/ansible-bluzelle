@@ -1,0 +1,121 @@
+---
+
+- name: Create blz user
+  user: "name={{ runuser }} home=/home/{{ runuser }} shell=/bin/bash"
+
+# Package install
+- name: Install prerequisites
+  package:
+    name:
+      - build-essential
+      - jq
+    state: latest
+
+- name: Export go variables
+  blockinfile:
+    path: "/home/{{ runuser }}/.bashrc"
+    block: |
+      # Golang
+      export GOPATH=/go
+      export GOBIN=${GOPATH}/bin
+      export PATH=$PATH:$GOBIN:/usr/local/go/bin
+
+- name: Create go directories
+  file:
+    path: /go/{{ item }}
+    state: directory
+    recurse: yes
+    owner: "{{ runuser }}"
+    group:  "{{ runuser }}"
+  with_items:
+    - "src/github.com/bluzelle/curium"
+    - "bin"
+    - "pkg"
+
+- git:
+    repo: 'https://github.com/bluzelle/curium.git'
+    dest: /go/src/github.com/bluzelle/curium
+
+- name: Build bluzelle
+  make:
+    chdir: /go/src/github.com/bluzelle/curium
+    target: "{{ bluzelle_version }}"
+  become: yes
+  environment:
+    GOPATH: "/go"
+    GOBIN: "/go/bin"
+    PATH: "{{ ansible_env.PATH }}:$GOBIN:/usr/local/go/bin"
+
+- name: Chown go directories
+  file:
+    path: /go/
+    state: directory
+    recurse: yes
+    owner: "{{ runuser }}"
+    group:  "{{ runuser }}"
+
+# # TODO: verificy blzcli/blzd are properly installed
+# # https://docs.bluzelle.com/developers/build-the-curium-project
+
+- name: Create initial transaction
+  command:
+    cmd: "/go/bin/blzd init {{ moniker_name }} --chain-id {{ chain_id }}"
+    creates: ~/.blzd/config/genesis.json
+  register: node_id
+  become: yes
+  environment:
+    GOPATH: "/go"
+    GOBIN: "/go/bin"
+    PATH: "{{ ansible_env.PATH }}:$GOBIN:/usr/local/go/bin"
+  become_user: "{{ runuser }}"
+
+- name: Create blzcli directory
+  file:
+    path: /home/{{ runuser }}/.blzcli/config
+    state: directory
+    recurse: yes
+
+- name: Set blzcli config
+  template:
+    src: config_blzcli.j2
+    dest: /home/{{ runuser }}/.blzcli/config/config.toml
+
+- name: Set addr_book_strict to false
+  lineinfile:
+    path: /home/{{ runuser }}/.blzd/config/config.toml
+    regexp: '^addr_book_strict ='
+    line: addr_book_strict = false
+
+- name: Set minimum gas price
+  lineinfile:
+    path: /home/{{ runuser }}/.blzd/config/app.toml
+    regexp: '^minimum-gas-prices ='
+    line: minimum-gas-prices = "{{ minimum_gas_prices }}"
+
+- name: Set crud
+  lineinfile:
+    path: /home/{{ runuser }}/.blzd/config/app.toml
+    regexp: '^bluzelle_crud ='
+    line: bluzelle_crud = true
+
+- name: Copy genesis file
+  copy:
+    src: "genesis.json"
+    dest: /home/{{ runuser }}/.blzd/config/genesis.json
+
+- name: Set blzd systemctl
+  template:
+    src: systemctl_blzd.j2
+    dest: "/etc/systemd/system/blzd.service"
+
+- name: Chown blz directories
+  file:
+    path: "{{ item }}"
+    recurse: yes
+    owner: "{{ runuser }}"
+    group:  "{{ runuser }}"
+  with_items:
+    - /home/{{ runuser }}/.blzd/
+    - /home/{{ runuser }}/.blzcli/
+
+...
