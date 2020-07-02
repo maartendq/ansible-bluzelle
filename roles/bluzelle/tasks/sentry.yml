@@ -35,5 +35,4 @@
     daemon_reload: yes
     enabled: yes
     name: blzd
-  become_user: "{{ runuser }}"
 ...

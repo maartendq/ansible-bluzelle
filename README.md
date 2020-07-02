@@ -2,6 +2,9 @@
 This repository contains playbooks and roles to install/configure bluzelle validator/sentry for the testnet
 Work In progress
 
+## TODO
+Investigate if possible to fetch tokens and self delegate the validator
+
 ## Requirements
 Parts of this setup need to be run with root privileges.
 
