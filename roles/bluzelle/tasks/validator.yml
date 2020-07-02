@@ -12,7 +12,7 @@
     line: pex = false
 
 - name: Create keys for user
-  command: 
+  command:
     cmd: "/go/bin/blzcli keys add {{ self_delegator }}"
   register: self_delegator_keys
   become: yes
