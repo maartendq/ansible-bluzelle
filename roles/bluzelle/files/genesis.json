@@ -1,6 +1,6 @@
 {
-  "genesis_time": "2020-05-29T09:06:28.12740914Z",
-  "chain_id": "bluzelle",
+  "genesis_time": "2020-07-04T19:39:29.941997658Z",
+  "chain_id": "bluzelleTestPublic-1",
   "consensus_params": {
     "block": {
       "max_bytes": "22020096",
@@ -19,53 +19,31 @@
   },
   "app_hash": "",
   "app_state": {
-    "crud": {
-      "BlzValues": null
-    },
-    "bank": {
-      "send_enabled": true
-    },
-    "distribution": {
+    "auth": {
       "params": {
-        "community_tax": "0.000200000000000000",
-        "base_proposer_reward": "0.010000000000000000",
-        "bonus_proposer_reward": "0.040000000000000000",
-        "withdraw_addr_enabled": true
+        "max_memo_characters": "256",
+        "tx_sig_limit": "7",
+        "tx_size_cost_per_byte": "10",
+        "sig_verify_cost_ed25519": "590",
+        "sig_verify_cost_secp256k1": "1000"
       },
-      "fee_pool": {
-        "community_pool": []
-      },
-      "delegator_withdraw_infos": [],
-      "previous_proposer": "",
-      "outstanding_rewards": [],
-      "validator_accumulated_commissions": [],
-      "validator_historical_rewards": [],
-      "validator_current_rewards": [],
-      "delegator_starting_infos": [],
-      "validator_slash_events": []
-    },
-    "gov": {
-      "starting_proposal_id": "1",
-      "deposits": null,
-      "votes": null,
-      "proposals": null,
-      "deposit_params": {
-        "min_deposit": [
-          {
-            "denom": "ubnt",
-            "amount": "1000000000"
+      "accounts": [
+        {
+          "type": "cosmos-sdk/Account",
+          "value": {
+            "address": "bluzelle1efcg25eunec76u4q63es8lpj73mwytcfr0s7sl",
+            "coins": [
+              {
+                "denom": "ubnt",
+                "amount": "2000000000000000"
+              }
+            ],
+            "public_key": "",
+            "account_number": 0,
+            "sequence": 0
           }
-        ],
-        "max_deposit_period": "259200000000000"
-      },
-      "voting_params": {
-        "voting_period": "604800000000000"
-      },
-      "tally_params": {
-        "quorum": "0.336000000000000000",
-        "threshold": "0.505000000000000000",
-        "veto": "0.336000000000000000"
-      }
+        }
+      ]
     },
     "genutil": {
       "gentxs": [
@@ -89,12 +67,12 @@
                     "max_change_rate": "0.010000000000000000"
                   },
                   "min_self_delegation": "1",
-                  "delegator_address": "bluzelle13nqmczw5kygg0dvj4cxaf4leu72jp02xg4hse6",
-                  "validator_address": "bluzellevaloper13nqmczw5kygg0dvj4cxaf4leu72jp02xgcyduv",
-                  "pubkey": "bluzellevalconspub1zcjduepqlzcj2z56w5eawaqenr4gws4kk3xqqwfcuc08egl2cll7u8h8vndsfx0p0t",
+                  "delegator_address": "bluzelle1efcg25eunec76u4q63es8lpj73mwytcfr0s7sl",
+                  "validator_address": "bluzellevaloper1efcg25eunec76u4q63es8lpj73mwytcfrzrr4f",
+                  "pubkey": "bluzellevalconspub1zcjduepq7qwpn6p4y76w63k858pl39y67h7fu7hvslaedxf4tlq0439phtlq4dglav",
                   "value": {
                     "denom": "ubnt",
-                    "amount": "66666667000000"
+                    "amount": "50000000000000"
                   }
                 }
               }
@@ -107,47 +85,71 @@
               {
                 "pub_key": {
                   "type": "tendermint/PubKeySecp256k1",
-                  "value": "A21UT4n2dEo15RRIvx2dSLF9KNGNXo+LjCzwJJDNsVA/"
+                  "value": "Aon8nFZyuIGRt+xhNZrN+my5xm2Yny9v9VEuV4mzGndt"
                 },
-                "signature": "cNKlb1bLw1Z0j38DUhAzWXQ+YqEZF7CUvIGtkfn3O/4dx/9GwimkyzNnAATOUK0IdZj4SEImw4DDZgFdE/JJjg=="
+                "signature": "zzqzlKvfSUdCiZeDYRGD+SV+YYWfS85D4HGdSJr5W2c4oyQWVQn5Rgd5Kwbn8sVhiHFBcRBbmTNnaTs+10smow=="
               }
             ],
-            "memo": "db71898b085d0572961dec5bd95343f32f5039dc@172.17.0.2:26656"
+            "memo": "37e295380549f8773059499388a5bdce3b87f78e@172.17.0.2:26656"
           }
         }
       ]
     },
-    "auth": {
+    "bank": {
+      "send_enabled": true
+    },
+    "distribution": {
       "params": {
-        "max_memo_characters": "256",
-        "tx_sig_limit": "7",
-        "tx_size_cost_per_byte": "10",
-        "sig_verify_cost_ed25519": "590",
-        "sig_verify_cost_secp256k1": "1000"
+        "community_tax": "0.000500000000000000",
+        "base_proposer_reward": "0.010000000000000000",
+        "bonus_proposer_reward": "0.040000000000000000",
+        "withdraw_addr_enabled": true
       },
-      "accounts": [
-        {
-          "type": "cosmos-sdk/Account",
-          "value": {
-            "address": "bluzelle13nqmczw5kygg0dvj4cxaf4leu72jp02xg4hse6",
-            "coins": [
-              {
-                "denom": "ubnt",
-                "amount": "2000000000000000"
-              }
-            ],
-            "public_key": "",
-            "account_number": 0,
-            "sequence": 0
-          }
-        }
-      ]
+      "fee_pool": {
+        "community_pool": []
+      },
+      "delegator_withdraw_infos": [],
+      "previous_proposer": "",
+      "outstanding_rewards": [],
+      "validator_accumulated_commissions": [],
+      "validator_historical_rewards": [],
+      "validator_current_rewards": [],
+      "delegator_starting_infos": [],
+      "validator_slash_events": []
     },
-    "params": null,
+    "crud": {
+      "BlzValues": null
+    },
+    "gov": {
+      "starting_proposal_id": "1",
+      "deposits": null,
+      "votes": null,
+      "proposals": null,
+      "deposit_params": {
+        "min_deposit": [
+          {
+            "denom": "ubnt",
+            "amount": "1000000000"
+          }
+        ],
+        "max_deposit_period": "259200000000000"
+      },
+      "voting_params": {
+        "voting_period": "604800000000000"
+      },
+      "tally_params": {
+        "quorum": "0.335000000000000000",
+        "threshold": "0.500000000000000000",
+        "veto": "0.335000000000000000"
+      }
+    },
+    "supply": {
+      "supply": []
+    },
     "staking": {
       "params": {
         "unbonding_time": "1814400000000000",
-        "max_validators": 250,
+        "max_validators": 500,
         "max_entries": 7,
         "historical_entries": 0,
         "bond_denom": "ubnt"
@@ -171,9 +173,7 @@
       "signing_infos": {},
       "missed_blocks": {}
     },
-    "faucet": null,
-    "supply": {
-      "supply": []
-    }
+    "params": null,
+    "faucet": null
   }
 }
