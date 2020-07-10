@@ -1,0 +1,4 @@
+---
+moniker_name: "sentryTest"
+sentry_persistent_peers: "9911bbee6edf4d5f5adcd89301b86a8fc5821b7d@3.7.235.177:26656, 43095608044c2a281fb03f9eb2aa860fb0f3a151@18.157.192.125:26656"
+...
