@@ -1,6 +1,6 @@
 ---
 bluzelle_version: "testnet"
-chain_id: "bluzelle"
+chain_id: "bluzelleTestPublic-1"
 sentry_private_peers: ""
 max_num_inbound_peers: 200
 max_num_outbound_peers: 100
