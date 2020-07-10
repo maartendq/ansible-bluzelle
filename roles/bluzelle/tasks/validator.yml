@@ -3,7 +3,7 @@
   lineinfile:
     path: /home/{{ runuser }}/.blzd/config/config.toml
     regexp: '^persistent_peers ='
-    line: persistent_peers = {{ validator_persistent_peers }}
+    line: persistent_peers = "{{ validator_persistent_peers }}"
 
 - name: Set pex
   lineinfile:
