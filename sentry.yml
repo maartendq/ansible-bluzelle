@@ -3,10 +3,11 @@
   become: yes
   any_errors_fatal: true
   tasks:
-    # Installing curl to force apt-get update
-    - name: Update repositories cache and install "curl" package
+    - name: Update repositories cache and install prerequisites
       apt:
-        name: curl
+        pkg:
+          - curl
+          - acl
         update_cache: yes
     - import_role:
         name: ansible-role-golang
